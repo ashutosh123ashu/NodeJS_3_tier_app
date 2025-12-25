@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: mongo-svs
+  
+spec: 
+  selector:
+    app: mongoDb
+  ports:
+  - name: mongo-svc
+    protocol: TCP
+    port: 27017
+    targetPort: 27017
