@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io
+kind: Ingress
+metadata:
+  name: mainlb 
+  namespace: workshop
+  annotations: 
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip 
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+spec:
+  ingressClassName: ilb 
+  rules:
+    - host: 
+      http: 
+        paths:
+        - path: /backend
+          pathType: Prefix
+          backend:
+            service:
+              name: backend 
+              port: 
+                number: 8080
+        - path: /frontend
+          pathType: Prefix
+          backend:
+            service:
+              name: frontend 
+              port: 
+                number: 3000
